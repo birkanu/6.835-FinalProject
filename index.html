@@ -21,12 +21,29 @@
 </head> 
 
 <body> 
-
-	<div id="pano"></div>
-	<div id="controls">
-		<div id="map"></div>
-	</div>	
-
+	<div aria-busy="true" aria-label="Loading" role="progressbar" class="loading-container">
+	  	<div class="swing">
+		    <div class="swing-l"></div>
+		    <div></div>
+		    <div></div>
+		    <div></div>
+		    <div></div>
+		    <div></div>
+		    <div class="swing-r"></div>
+	  	</div>
+	</div>
+  	<div class="loading-message">
+		<p>Loading the Hyperlapse Video for your route...</p>
+	</div>
+	<div id="pano" style="display:none;"></div>
+	<div id="map" style="display:none;"></div>
+	<div class="info-panel" style="display:none;">
+		<div id="speed"><h1><span id="speedValue">0</span> MPH</h1></div>
+		<div id="direction"><img id="directionIMG" src="img/direction.png"/></div>
+	</div>
+	<div class="feedback-panel" style="display:none;">
+		<div id="messages"><p id="message">Hold your <b>right open hand</b> in front of Leap to start driving.</p></div>	
+	</div>
 </body> 
 
 </html>
