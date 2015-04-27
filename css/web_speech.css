@@ -29,11 +29,15 @@ body {
 }
 
     .address_form label {
-        font-size:1.25em;
+        font-size: 1.25em;
         font-weight: 400;
     }
 
     .address_form button {
         font-size: 1.25em;
         font-weight: 600;
+    }
+
+    .address_form #end, #start {
+        padding: 15px;
     }

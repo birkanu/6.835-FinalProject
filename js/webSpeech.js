@@ -10,10 +10,112 @@ $(document).ready(function() {
     //$("#generate_hyperlapse_button_div").hide();
     var interimResult = '';
     var divID = 'start';
-    var textField = $("#start_textfield");
-    var textFieldID = "start_textfield";
 
     var curState = "listen";
+
+    var setStartLatLng = function(loc) {
+        // If invalid location, prompt user to reenter
+        if (loc == null) {
+            $("#start").css("background-color", "#FF6347");
+            $("#start_textfield").val("");
+            $("#start_textfield_label").html("That location is invalid! Say 'START' to edit start location:");
+            return;
+        } else {
+            startLatLng = loc;
+            startLocationSet = true;
+            $("#start").css("background-color", "#90EE90");  
+            $("#start_textfield_label").html("Successfully set start location! Say 'START' to edit start location:");
+            if (startLocationSet && endLocationSet) {
+                $("#generate_hyperlapse_button").removeAttr("disabled");
+            }
+            return;         
+        }
+    }
+
+    var setEndLatLng = function(loc) {
+        // If invalid location, prompt user to reenter
+        if (loc == null) {
+            $("#end").css("background-color", "#FF6347");
+            $("#end_textfield").val("");
+            $("#end_textfield_label").html("That location is invalid! Say 'DESTINATION' to edit end location:");
+            return;
+        } else {
+            endLatLng = loc;
+            endLocationSet = true;
+            $("#end").css("background-color", "#90EE90");  
+            $("#end_textfield_label").html("Successfully set end location! Say 'DESTINATION' to edit end location:"); 
+            if (startLocationSet && endLocationSet) {
+                $("#generate_hyperlapse_button").removeAttr("disabled");
+            }
+            return;         
+        }
+    }
+
+    var start_location_recognition = function() {
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'en';
+        var textField = $("#start_textfield");
+        textField.val("");
+        var textFieldID = "start_textfield";
+
+        recognition.onresult = function (event) {
+            var pos = textField.getCursorPosition() - interimResult.length;
+            textField.val(textField.val().replace(interimResult, ''));
+            interimResult = '';
+            textField.setCursorPosition(pos);
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    recognition.stop();
+                    $("#start_textfield_label").html("Processing...");
+                    insertAtCaret(textFieldID, event.results[i][0].transcript);
+                    var latlng = getLatLng(event.results[i][0].transcript, setStartLatLng);
+                    recognition = init_recognition();
+                    recognition.start();
+                } else {
+                    isFinished = false;
+                    insertAtCaret(textFieldID, event.results[i][0].transcript + '\u200B');
+                    interimResult += event.results[i][0].transcript + '\u200B';
+                }
+            }
+        }
+
+        return recognition;        
+    }
+
+    var end_location_recognition = function() {
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'en';
+        var textField = $("#end_textfield");
+        textField.val("");
+        var textFieldID = "end_textfield";
+
+        recognition.onresult = function (event) {
+            var pos = textField.getCursorPosition() - interimResult.length;
+            textField.val(textField.val().replace(interimResult, ''));
+            interimResult = '';
+            textField.setCursorPosition(pos);
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    recognition.stop();
+                    $("#end_textfield_label").html("Processing...");
+                    insertAtCaret(textFieldID, event.results[i][0].transcript);
+                    var latlng = getLatLng(event.results[i][0].transcript, setEndLatLng);
+                    recognition = init_recognition();
+                    recognition.start();
+                } else {
+                    isFinished = false;
+                    insertAtCaret(textFieldID, event.results[i][0].transcript + '\u200B');
+                    interimResult += event.results[i][0].transcript + '\u200B';
+                }
+            }
+        }
+
+        return recognition;        
+    }
 
     var init_recognition = function() {
         var recognition = new webkitSpeechRecognition();
@@ -21,14 +123,22 @@ $(document).ready(function() {
         recognition.lang = 'en';
         recognition.onresult = function (event) {
             for (i = 0; i < event.results.length; i++) {
+                console.log(event.results[i][0].transcript);
                 if (event.results[i][0].transcript.toUpperCase() == "start".toUpperCase()) {
+                    recognition.stop();
                     $("#start_textfield").focus();
-                    $("#start_textfield_label").html("Say a start address or landmark");
-                    // var start_recognition = start_location_recognition();
+                    $("#start").css("background-color", "#87CEFA");  
+                    $("#start_textfield_label").html("LISTENING: Say a start address or landmark:");
+                    var start_recognition = start_location_recognition();
+                    start_recognition.start();
                     break;
-                } else if (event.results[i][0].transcript.toUpperCase() == "start".toUpperCase()) {
-                    $("#start_textfield").focus();
-                    $("#start_textfield_label").html("Say a start address or landmark");
+                } else if (event.results[i][0].transcript.toUpperCase() == "destination".toUpperCase()) {
+                    recognition.stop();
+                    $("#end_textfield").focus();
+                    $("#end").css("background-color", "#87CEFA");  
+                    $("#end_textfield_label").html("LISTENING: Say an end address or landmark:");
+                    var end_recognition = end_location_recognition();
+                    end_recognition.start();                    
                     break;
                 }   
             }            
