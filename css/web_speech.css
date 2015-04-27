@@ -1,0 +1,39 @@
+body {
+    text-align: center;
+    font-family: "Helvetica", serif;
+}
+
+.heading {
+    font-size: 4em;
+    font-weight: 800;
+}
+
+.subheading {
+    margin-top: 0px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 25px;
+    font-size: 1.5em;
+    font-style: italic;
+}
+
+#speech {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.address_form {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 25px;
+    text-align: left;
+}
+
+    .address_form label {
+        font-size:1.25em;
+        font-weight: 400;
+    }
+
+    .address_form button {
+        font-size: 1.25em;
+        font-weight: 600;
+    }
