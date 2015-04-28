@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    font-family: "Helvetica", serif;
+    font-family: "Helvetica", sans-serif;
 }
 
 .heading {
@@ -39,5 +39,11 @@ body {
     }
 
     .address_form #end, #start {
+        padding: 15px;
+    }
+
+    .address_form #route_feedback {
+        background: red;
+        color: white;
         padding: 15px;
     }

@@ -1,8 +1,15 @@
 $(document).ready(function(){
 
-	var start_point = new google.maps.LatLng(-28.81823,29.69651);
-	var end_point = new google.maps.LatLng(-28.78515,29.680820000000004);
-	var lookat_point = new google.maps.LatLng(-28.8003314927684, 29.67021392578124);
+    var start_details = localStorage.getItem('startLatLng');
+    var startLatLng = start_details.split(',');
+    var end_details = localStorage.getItem('endLatLng');
+    var endLatLng = end_details.split(',');
+	var start_point = new google.maps.LatLng(startLatLng[1], startLatLng[0]);
+	var end_point = new google.maps.LatLng(endLatLng[1], endLatLng[0]);
+	var lookat_point = new google.maps.LatLng(endLatLng[1], endLatLng[0]);    
+	// var start_point = new google.maps.LatLng(-28.81823,29.69651);
+	// var end_point = new google.maps.LatLng(-28.78515,29.680820000000004);
+	// var lookat_point = new google.maps.LatLng(-28.8003314927684, 29.67021392578124);
 	var map, directions_renderer, directions_service, streetview_service, geocoder;
 	var start_pin, end_pin, pivot_pin, camera_pin;
 	var _elevation = 0;
