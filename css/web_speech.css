@@ -47,3 +47,7 @@ body {
         color: white;
         padding: 15px;
     }
+
+    .address_form #generate_hyperlapse_button {
+        margin-left: 15px;
+    }
