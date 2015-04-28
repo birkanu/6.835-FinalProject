@@ -7,7 +7,11 @@
 
     <title>LeapSV</title> 
 
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/web_speech.css" rel="stylesheet">
+
     <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>    
     <script src="js/webSpeech.js"></script> 
     <script src="js/insertAtCaret.js"></script> 
@@ -16,20 +20,25 @@
 </head>
 
 <body>
+    <div id="map-canvas" style="width: 0%; height:0%"></div>
     <div id="speech">
-        <h1>LeapSV</h1>
-        <form>
-            <div id="start">
-                <label for="start_textfield">Start address or landmark:</label>
-                <input type="text" id="start_textfield" size="75"/><br>
+        <h1 class="heading">LeapSV</h1>
+        <p class="subheading">A gesture controlled explorer for Google Street View</p>
+        <form class="address_form">
+            <div class="form-group" id="route_feedback">
+                <label id="route_feedback_label"></label>
+            </div>            
+            <div class="form-group" id="start">
+                <label for="start_textfield" id="start_textfield_label">Say 'START' to edit start location:</label>
+                <input type="text" class="form-control" id="start_textfield" size="75" />
             </div>
-            <div id="end">
-                <label for="end_textfield">End address or landmark:</label>
-                <input type="text" id="end_textfield" size="75"/>    
+            <div class="form-group" id="end">
+                <label for="end_textfield" id="end_textfield_label">Say 'DESTINATION' to edit end location:</label>
+                <input type="text" class="form-control" id="end_textfield" size="75"/>    
             </div>
-            <div id="feedback"></div>
-            <div id="generate_hyperlapse_button_div">
-                <button id="generate_hyperlapse_button">Generate Hyperlapse</button>
+            <div class="form-group" id="feedback"></div>
+            <div class="form-group" id="generate_hyperlapse_button_div">
+                <button id="generate_hyperlapse_button" class="btn btn-primary" disabled>Generate Hyperlapse</button>
             </div>                
         </form>            
     </div>
