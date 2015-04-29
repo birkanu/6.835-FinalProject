@@ -243,13 +243,14 @@ $(document).ready(function(){
 						$("#message").html("You are driving. Make a <b>right hand fist</b> gesture to stop.");
 					}
 					leap_palmPosition_y = hand.stabilizedPalmPosition[1];
-					hyperlapse_millis = scale(leap_palmPosition_y, 20, 500, 75, 250);
+					hyperlapse_millis = scale(leap_palmPosition_y, 20, 700, 75, 250);
 					hyperlapse.millis = hyperlapse_millis;
-					var speed = scale(hyperlapse_millis, 75, 250, 150, 0);
+					var speed = scale(hyperlapse_millis, 75, 250, 150, 10);
 					speed = Math.round(speed);
+					console.log(speed)
 					if (hyperlapse.isPlaying()) {
-						if (speed < 0) {
-							$("#speedValue").text(0);
+						if (speed < 10) {
+							$("#speedValue").text(10);
 						} else {
 							$("#speedValue").text(speed);
 						}
@@ -260,6 +261,13 @@ $(document).ready(function(){
 						hyperlapse.setForward(false);
 						if (!hyperlapse.hasNext()) {
 							hyperlapse.play();
+							var speed = scale(hyperlapse.millis, 75, 250, 150, 10);
+							speed = Math.round(speed);
+							if (speed < 10) {
+								$("#speedValue").text(10);
+							} else {
+								$("#speedValue").text(speed);
+							}
 							$("#message").html("You are driving. Make a <b>right hand fist</b> gesture to stop.");
 							continue;
 						} else {
@@ -269,6 +277,13 @@ $(document).ready(function(){
 						hyperlapse.setForward(true);
 						if (!hyperlapse.hasPrev()) {
 							hyperlapse.play();
+							var speed = scale(hyperlapse.millis, 75, 250, 150, 10);
+							speed = Math.round(speed);
+							if (speed < 10) {
+								$("#speedValue").text(10);
+							} else {
+								$("#speedValue").text(speed);
+							}
 							$("#message").html("You are driving. Make a <b>right hand fist</b> gesture to stop.");
 							continue;
 						} else {
