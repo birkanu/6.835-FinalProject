@@ -228,7 +228,7 @@ $(document).ready(function() {
                     if (startLocationSet && endLocationSet) {
                         localStorage.setItem('startLatLng', startLatLng.D + "," + startLatLng.k);
                         localStorage.setItem('endLatLng', endLatLng.D + "," + endLatLng.k);
-                        document.location.href = "index.html";                      
+                        document.location.href = "leapsv.html";                      
                     }
                 } 
             }            
