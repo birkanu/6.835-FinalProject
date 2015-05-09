@@ -226,8 +226,8 @@ $(document).ready(function() {
                     break;
                 }  else if (event.results[i][0].transcript.toUpperCase() == "hyperlapse".toUpperCase()) {
                     if (startLocationSet && endLocationSet) {
-                        localStorage.setItem('startLatLng', startLatLng.D + "," + startLatLng.k);
-                        localStorage.setItem('endLatLng', endLatLng.D + "," + endLatLng.k);
+                        localStorage.setItem('startLatLng', startLatLng.lat() + "," + startLatLng.lng());
+                        localStorage.setItem('endLatLng', endLatLng.lat() + "," + endLatLng.lng());
                         document.location.href = "leapsv.html";                      
                     }
                 } 
@@ -251,8 +251,9 @@ $(document).ready(function() {
             return;
         }
 
-        localStorage.setItem('startLatLng', startLatLng.D + "," + startLatLng.k);
-        localStorage.setItem('endLatLng', endLatLng.D + "," + endLatLng.k);
+        localStorage.setItem('startLatLng', startLatLng.lat() + "," + startLatLng.lng());
+                                console.log( startLatLng.lat() + "," + startLatLng.lng())
+        localStorage.setItem('endLatLng', endLatLng.lat() + "," + endLatLng.lng());
         document.location.href = "leapsv.html";        
 
     });

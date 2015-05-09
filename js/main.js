@@ -4,9 +4,9 @@ $(document).ready(function(){
     var startLatLng = start_details.split(',');
     var end_details = localStorage.getItem('endLatLng');
     var endLatLng = end_details.split(',');
-	var start_point = new google.maps.LatLng(startLatLng[1], startLatLng[0]);
-	var end_point = new google.maps.LatLng(endLatLng[1], endLatLng[0]);
-	var lookat_point = new google.maps.LatLng(endLatLng[1], endLatLng[0]);    
+	var start_point = new google.maps.LatLng(parseFloat(startLatLng[0]), parseFloat(startLatLng[1]));
+	var end_point = new google.maps.LatLng(parseFloat(endLatLng[0]), parseFloat(endLatLng[1]));
+	var lookat_point = new google.maps.LatLng(endLatLng[0], endLatLng[0]);  
 	// var start_point = new google.maps.LatLng(-28.81823,29.69651);
 	// var end_point = new google.maps.LatLng(-28.78515,29.680820000000004);
 	// var lookat_point = new google.maps.LatLng(-28.8003314927684, 29.67021392578124);
@@ -247,7 +247,6 @@ $(document).ready(function(){
 					hyperlapse.millis = hyperlapse_millis;
 					var speed = scale(hyperlapse_millis, 75, 250, 150, 10);
 					speed = Math.round(speed);
-					console.log(speed)
 					if (hyperlapse.isPlaying()) {
 						if (speed < 10) {
 							$("#speedValue").text(10);
