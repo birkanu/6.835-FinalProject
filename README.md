@@ -13,3 +13,5 @@ Go to https://web.mit.edu/birkanu/www/finalProject/ (make sure https is used sin
 ![](https://raw.githubusercontent.com/birkanu/6.835-FinalProject/master/img/load_unsafe.png)
 
 The instructions about how to use hand gestures are explained in detail in the paper submitted. You can also follow the instructions that show up on the screen. 
+
+<b>Note:</b> If at anytime you notice that LeapSV is not responding well to your gestures, this is probably because of a slow internet connection. You can locally open leapsv.html to test gestures on an example route we defined. Also note that, on the index page, you can enter the start and the end locations by typing them on the keyboard and hitting the Generate Hyperlapse button locally (only speech doesn't work locally).
