@@ -228,7 +228,7 @@ $(document).ready(function() {
                     if (startLocationSet && endLocationSet) {
                         localStorage.setItem('startLatLng', startLatLng.lat() + "," + startLatLng.lng());
                         localStorage.setItem('endLatLng', endLatLng.lat() + "," + endLatLng.lng());
-                        document.location.href = "leapsv.html";                      
+                        document.location.href = "leapsv.html?route=true";                      
                     }
                 } 
             }            
@@ -254,7 +254,7 @@ $(document).ready(function() {
         localStorage.setItem('startLatLng', startLatLng.lat() + "," + startLatLng.lng());
                                 console.log( startLatLng.lat() + "," + startLatLng.lng())
         localStorage.setItem('endLatLng', endLatLng.lat() + "," + endLatLng.lng());
-        document.location.href = "leapsv.html";        
+        document.location.href = "leapsv.html?route=true";        
 
     });
 

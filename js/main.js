@@ -1,15 +1,19 @@
 $(document).ready(function(){
 
-    var start_details = localStorage.getItem('startLatLng');
-    var startLatLng = start_details.split(',');
-    var end_details = localStorage.getItem('endLatLng');
-    var endLatLng = end_details.split(',');
-	var start_point = new google.maps.LatLng(parseFloat(startLatLng[0]), parseFloat(startLatLng[1]));
-	var end_point = new google.maps.LatLng(parseFloat(endLatLng[0]), parseFloat(endLatLng[1]));
-	var lookat_point = new google.maps.LatLng(endLatLng[0], endLatLng[0]);  
-	// var start_point = new google.maps.LatLng(-28.81823,29.69651);
-	// var end_point = new google.maps.LatLng(-28.78515,29.680820000000004);
-	// var lookat_point = new google.maps.LatLng(-28.8003314927684, 29.67021392578124);
+	if (getQueryVariable('route')) {
+	    var start_details = localStorage.getItem('startLatLng');
+	    var startLatLng = start_details.split(',');
+	    var end_details = localStorage.getItem('endLatLng');
+	    var endLatLng = end_details.split(',');
+		var start_point = new google.maps.LatLng(parseFloat(startLatLng[0]), parseFloat(startLatLng[1]));
+		var end_point = new google.maps.LatLng(parseFloat(endLatLng[0]), parseFloat(endLatLng[1]));
+		var lookat_point = new google.maps.LatLng(endLatLng[0], endLatLng[0]);  
+	} else {
+		var start_point = new google.maps.LatLng(-28.81823,29.69651);
+		var end_point = new google.maps.LatLng(-28.78515,29.680820000000004);
+		var lookat_point = new google.maps.LatLng(-28.8003314927684, 29.67021392578124);
+	}
+	
 	var map, directions_renderer, directions_service, streetview_service, geocoder;
 	var start_pin, end_pin, pivot_pin, camera_pin;
 	var _elevation = 0;
@@ -31,6 +35,16 @@ $(document).ready(function(){
 		end_pin.getPosition().lat() + ',' + 
 		end_pin.getPosition().lng() + ',' + 
 		_elevation;
+	}
+
+	function getQueryVariable(variable) {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return false;
 	}
 
 	function scale(value, leap_min, leap_max, hyperlapse_min, hyperlapse_max) {
