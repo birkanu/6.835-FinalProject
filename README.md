@@ -10,6 +10,6 @@ The app was built and tested using Google Chrome Version 42.0.2311.135 (64-bit) 
 
 Go to https://web.mit.edu/birkanu/www/finalProject/ (make sure https is used since it does not continously ask you if you want to allow using your microphone) to run the application. The speech recognition on this page won't work locally because of the Web Speech API. Once the start and the end locations are entered and the "HYPERLAPSE" command is given, you will be directed to the hyperlapse page. A warning will appear on the browser input field saying that "This page is trying to load scripts from unauthenticated sources". Please click on "Load unsafe scripts" to be able to use your Leap Motion and have LeapSV generate the hyperlapse video. Image below shows where to click on:  
 
-![](http://github.com/birkanu/6.835-FinalProject/tree/master/img/load_unsafe.png)
+![](https://raw.githubusercontent.com/birkanu/6.835-FinalProject/master/img/load_unsafe.png)
 
 The instructions about how to use hand gestures are explained in detail in the paper submitted. You can also follow the instructions that show up on the screen. 
