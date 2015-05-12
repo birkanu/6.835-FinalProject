@@ -200,14 +200,21 @@ $(document).ready(function() {
     });
 
     var init_recognition = function() {
+        var restart = true;
         var recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;        
+        recognition.onend = function(event) {
+            if (restart) {
+                recognition.start();            
+            }
+        }
+        recognition.continuous = false;        
         recognition.lang = 'en';
         recognition.onresult = function (event) {
             for (i = 0; i < event.results.length; i++) {
                 console.log(event.results[i][0].transcript);
                 if (event.results[i][0].transcript.toUpperCase() == "start".toUpperCase()) {
                     $("#route_feedback").hide();
+                    restart = false;
                     recognition.stop();
                     $("#start_textfield").focus();
                     $("#start").css("background-color", "#87CEFA");  
@@ -217,6 +224,7 @@ $(document).ready(function() {
                     break;
                 } else if (event.results[i][0].transcript.toUpperCase() == "destination".toUpperCase()) {
                     $("#route_feedback").hide();                    
+                    restart = false;
                     recognition.stop();
                     $("#end_textfield").focus();
                     $("#end").css("background-color", "#87CEFA");  
